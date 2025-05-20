@@ -4,22 +4,28 @@ function nextPage() {
 
 function moveButton() {
     const noButton = document.getElementById('noButton');
-    const container = document.querySelector('.container');
 
-    // Tamaño del contenedor y botón
-    const containerRect = container.getBoundingClientRect();
+    // Tamaño de la ventana y del botón
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
     const buttonRect = noButton.getBoundingClientRect();
 
-    // Generar nueva posición aleatoria dentro del contenedor
-    const maxX = containerRect.width - buttonRect.width;
-    const maxY = containerRect.height - buttonRect.height;
+    // Generar nueva posición aleatoria dentro de la ventana
+    const maxX = windowWidth - buttonRect.width;
+    const maxY = windowHeight - buttonRect.height;
 
     const randomX = Math.random() * maxX;
     const randomY = Math.random() * maxY;
 
     noButton.style.position = 'absolute';
-    noButton.style.left = `${randomX}px`;
-    noButton.style.top = `${randomY}px`;
+    noButton.style.transition = 'transform 0.3s ease, left 0.3s ease, top 0.3s ease';
+    noButton.style.transform = 'scale(1.2) rotate(10deg)';
+
+    setTimeout(() => {
+        noButton.style.left = `${randomX}px`;
+        noButton.style.top = `${randomY}px`;
+        noButton.style.transform = 'scale(1) rotate(0deg)';
+    }, 50);
 }
 
 // También hace que el botón se mueva al hacer click
